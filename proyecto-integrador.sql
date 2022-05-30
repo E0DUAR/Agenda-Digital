@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 22-08-2020 a las 22:09:52
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-05-2022 a las 20:01:20
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sistema_cursos`
+-- Base de datos: `proyecto-integrador`
 --
 
 -- --------------------------------------------------------
@@ -33,20 +33,13 @@ CREATE TABLE `alumnos` (
   `apellido` text DEFAULT NULL,
   `edad` int(11) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL,
-  `cedula` varchar(20) DEFAULT NULL,
-  `telefono` bigint(20) DEFAULT NULL,
-  `correo` varchar(255) DEFAULT NULL,
   `fecha_nac` date DEFAULT NULL,
-  `estatus` int(11) NOT NULL DEFAULT 1
+  `estado` int(1) NOT NULL DEFAULT 1,
+  `nombre_acudiente` varchar(50) DEFAULT NULL,
+  `apellido_acudiente` varchar(50) DEFAULT NULL,
+  `telefono_acudiente` int(10) NOT NULL,
+  `correo_acudiente` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `alumnos`
---
-
-INSERT INTO `alumnos` (`alumno_id`, `nombre`, `apellido`, `edad`, `direccion`, `cedula`, `telefono`, `correo`, `fecha_nac`, `estatus`) VALUES
-(1, 'Luis', 'Noguera', 29, 'Miranda - Venezuela', '20488267', 4161457223, 'luisnoguera2930@gmail.com', '2020-08-10', 1),
-(3, 'Andres', 'Noguera', 30, 'Caracas', '20488269', 584129624720, 'andres@andres.com', '2020-08-09', 1);
 
 -- --------------------------------------------------------
 
@@ -83,6 +76,17 @@ INSERT INTO `curso` (`curso_id`, `materia_id`, `profesor_id`, `estatusC`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `estado`
+--
+
+CREATE TABLE `estado` (
+  `id_estado` int(1) NOT NULL,
+  `descripcion` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `inscripcion`
 --
 
@@ -93,14 +97,6 @@ CREATE TABLE `inscripcion` (
   `turno_id` int(11) NOT NULL,
   `estatusI` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `inscripcion`
---
-
-INSERT INTO `inscripcion` (`inscripcion_id`, `alumno_id`, `curso_id`, `turno_id`, `estatusI`) VALUES
-(64, 1, 1, 1, 1),
-(65, 3, 108, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -154,7 +150,7 @@ INSERT INTO `profesor` (`profesor_id`, `nombre`, `apellido`, `direccion`, `cedul
 --
 
 CREATE TABLE `rol` (
-  `rol_id` int(11) NOT NULL,
+  `rol_id` int(1) NOT NULL,
   `nombre_rol` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -163,8 +159,9 @@ CREATE TABLE `rol` (
 --
 
 INSERT INTO `rol` (`rol_id`, `nombre_rol`) VALUES
-(1, 'Administrador'),
-(2, 'Asistente');
+(1, 'administrador'),
+(2, 'acudiente'),
+(3, 'docente');
 
 -- --------------------------------------------------------
 
@@ -216,7 +213,8 @@ INSERT INTO `usuarios` (`user_id`, `nombre`, `usuario`, `password`, `rol`, `esta
 -- Indices de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  ADD PRIMARY KEY (`alumno_id`);
+  ADD PRIMARY KEY (`alumno_id`),
+  ADD KEY `estado` (`estado`);
 
 --
 -- Indices de la tabla `aula`
@@ -231,6 +229,12 @@ ALTER TABLE `curso`
   ADD PRIMARY KEY (`curso_id`),
   ADD KEY `curso_ibfk_1` (`materia_id`),
   ADD KEY `curso_ibfk_2` (`profesor_id`);
+
+--
+-- Indices de la tabla `estado`
+--
+ALTER TABLE `estado`
+  ADD PRIMARY KEY (`id_estado`);
 
 --
 -- Indices de la tabla `inscripcion`
@@ -316,7 +320,7 @@ ALTER TABLE `profesor`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `rol_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `turno`
@@ -340,6 +344,12 @@ ALTER TABLE `usuarios`
 ALTER TABLE `curso`
   ADD CONSTRAINT `curso_ibfk_1` FOREIGN KEY (`materia_id`) REFERENCES `materia` (`materia_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `curso_ibfk_2` FOREIGN KEY (`profesor_id`) REFERENCES `profesor` (`profesor_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `estado`
+--
+ALTER TABLE `estado`
+  ADD CONSTRAINT `estado_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `alumnos` (`estado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `inscripcion`
