@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>wq</h1>
+    <h1>Bienvenido docente</h1>
 </body>
 </html>
