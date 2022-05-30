@@ -37,7 +37,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,11 +48,14 @@
 <body>
     <header class="main-header">
         <div class="main-cont">
-            <div class="desc-header">
-                <img src="images/logo.png" alt="Logo manitas felices">
+        <div class="desc-logo">
+                <img src="images/portada.jpeg" alt="portada manitas felices">
             </div>
         </div>   
         <div class="cont-header">
+        <div class="desc-header">
+                <img src="images/logo.png" alt="Logo manitas felices">
+            </div>
             <h1>Bienvenid@</h1>
             <p>Manitas felices</p>
             <div class="form">
