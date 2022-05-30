@@ -49,18 +49,18 @@
     <header class="main-header">
         <div class="main-cont">
             <div class="desc-header">
-                <img src="images/school.svg" alt="image school">
-                <p>School</p>
+                <img src="images/logo.png" alt="Logo manitas felices">
             </div>
         </div>   
         <div class="cont-header">
             <h1>Bienvenid@</h1>
+            <p>Manitas felices</p>
             <div class="form">
-                <form action="" method="POST" onsubmit="return validar()">
+                <form action="validar.php" method="POST">
                     <label for="usuario">Usuario</label>
-                    <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario">
+                    <input type="text" name="usuario" id="usuario" placeholder="Ingrese su usuario">
                     <label for="password">Contraseña</label>
-                    <input type="password" name="pass" id="pass" placeholder="Contraseña">
+                    <input type="password" name="pass" id="pass" placeholder="Ingrese su contraseña">
                     <div class="alert"><?php echo (isset($alert) ? $alert : '' ); ?></div>
                     <button type="submit">INICIAR SESION</button>
                 </form>
