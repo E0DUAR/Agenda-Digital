@@ -1,2 +1,0 @@
-$conexion = myqli_connect("localhost", "root", "", "proyecto-integrador");
-include('db.php');
