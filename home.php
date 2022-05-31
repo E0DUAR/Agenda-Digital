@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="./CSS/style.css">
     <link rel="stylesheet" href="./CSS/header.css">
 </head>
+<header>
+<nav>
+            <a href="">Registro de usuarios</a>
+            <a href="">Calendario</a>
+            <a href="">Docentes</a>
+            <a href="">Estudiantes</a>
+            <a href="">Sobre nosotros</a>
+            <a href=""></a>
+
+        </nav>
+</header>
 <body>
     <h1>Bienvenido</h1>
 </body>
