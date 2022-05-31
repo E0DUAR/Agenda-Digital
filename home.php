@@ -15,6 +15,6 @@
 <a href="./redit/calendario.php">calendario</a>
 
 <div>
-    <a href=""></a>
+    <a href="./redit/registro.php">registro</a>
 </div>
 </html>
