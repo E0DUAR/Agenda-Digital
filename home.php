@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="./CSS/header.css">
 </head>
 <body>
-    <h1>Bienvenido admin</h1>
+    <h1>Bienvenido</h1>
 </body>
+
+<a href="./redit/calendario.php">calendario</a>
 
 <div>
     <a href=""></a>
